@@ -14,19 +14,6 @@ const CREATE_CONTACT_MUTATION = gql`
   }
 `;
 
-const GET_ALL_CONTACTS = gql`
-  query {
-    getAllContacts {
-      contacts {
-        id
-        name
-        email
-        phone
-      }
-    }
-  }
-`;
-
 const AddUserPage: React.FC = () => {
   const router = useRouter();
 
@@ -36,15 +23,7 @@ const AddUserPage: React.FC = () => {
     phone: ''
   });
 
-  const [addContact] = useMutation(CREATE_CONTACT_MUTATION, {
-    update: (cache, { data: { createContact } }) => {
-      const existingContacts: any = cache.readQuery({ query: GET_ALL_CONTACTS });
-      cache.writeQuery({
-        query: GET_ALL_CONTACTS,
-        data: { getAllContacts: { contacts: [...existingContacts.getAllContacts.contacts, createContact] } },
-      });
-    }
-  });
+  const [addContact, { loading, error }] = useMutation(CREATE_CONTACT_MUTATION);
 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -74,6 +53,8 @@ const AddUserPage: React.FC = () => {
       // Navigate back to the index page after adding a user
       router.push('/');
     } catch (error) {
+      console.error('Error adding user:', error.message);
+    }
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,7 +85,6 @@ const AddUserPage: React.FC = () => {
       </form>
     </div>
   );
- };
 };
 
 export default AddUserPage;

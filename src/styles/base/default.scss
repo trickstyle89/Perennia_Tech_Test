@@ -55,3 +55,22 @@
     padding-top: 50px; 
 
 }
+
+.add-user-button {
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #007bff; /* Replace with your preferred button color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-user-button:hover {
+  background-color: #0056b3; /* Replace with a darker shade or hover color */
+}
