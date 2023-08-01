@@ -31,7 +31,7 @@ const Home: React.FC = () => {
         ))}
       </main>
 
-      <Link href="/add-user">Add User</Link>
+      <Link href="/addUser">Add User</Link>
     </div>
   );
 };
